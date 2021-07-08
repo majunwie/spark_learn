@@ -19,13 +19,14 @@ import static org.apache.spark.sql.functions.col;
 public class SqlTest_GettingStarted {
     public static void main(String[] args) throws AnalysisException {
         SparkSession ss = SparkSession.builder().master("local").appName("sql").config("spark.some.config.option", "some-value").getOrCreate();
-//        Dataset<Row> ds = ss.read().format("csv")
-//                .option("sep", ",")
-//                .option("inferSchema", "true")
-//                .option("header", "true")
-//                .load("data.csv");
-//        //查询
-//        ds.select("name").show();
+        ss.sparkContext().setLogLevel("WARN");
+                Dataset<Row> ds = ss.read().format("csv")
+                .option("sep", ",")
+                .option("inferSchema", "true")
+                .option("header", "true")
+                .load("data.csv");
+        //查询
+        ds.select("name").show();
 //        ds.select("name","num").show();
 //        ds.groupBy("name").avg().show();
 //        ds.filter(col("num").gt(29)).show();
@@ -70,20 +71,24 @@ public class SqlTest_GettingStarted {
 //        Encoder<Person> personEncoder = Encoders.bean(Person.class);
 //        Dataset<Person> personDS = ss.createDataset(personJavaRDD.rdd(),personEncoder);
 //        personDS.show();
-        //2、没有定义javaBean
-        JavaRDD<String> stringRdd = ss.read().textFile("data.txt").javaRDD();
-        String schemaStr = "name,num";
-        List<StructField> fieldList = new ArrayList<>();
-        for (String s : schemaStr.split(",")) {
-            StructField structField = DataTypes.createStructField(s,DataTypes.StringType,true);
-            fieldList.add(structField);
-        }
-        StructType structType = DataTypes.createStructType(fieldList);
-        JavaRDD<Row> rowJavaRDD = stringRdd.map(it->{
-            String[] arr = it.split(",");
-            return RowFactory.create(arr[0],arr[1]);
-        });
-        Dataset<Row> ds = ss.createDataFrame(rowJavaRDD,structType);
-        ds.show();
+//        //2、没有定义javaBean
+//        JavaRDD<String> stringRdd = ss.read().textFile("data.txt").javaRDD();
+//        String schemaStr = "name,num";
+//        List<StructField> fieldList = new ArrayList<>();
+//        for (String s : schemaStr.split(",")) {
+//            StructField structField = DataTypes.createStructField(s,DataTypes.StringType,true);
+//            fieldList.add(structField);
+//        }
+//        StructType structType = DataTypes.createStructType(fieldList);
+//        JavaRDD<Row> rowJavaRDD = stringRdd.map(it->{
+//            String[] arr = it.split(",");
+//            return RowFactory.create(arr[0],arr[1]);
+//        });
+//        Dataset<Row> ds = ss.createDataFrame(rowJavaRDD,structType);
+//        ds.show();
+//        ss.stop();
+
+
+
     }
 }
