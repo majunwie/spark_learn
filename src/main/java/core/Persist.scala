@@ -23,5 +23,4 @@ object Persist {
     println(value2.getStorageLevel)
     println(value3.getStorageLevel)
   }
-
 }
