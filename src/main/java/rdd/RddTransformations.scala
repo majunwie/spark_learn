@@ -5,7 +5,7 @@ import org.apache.spark.{SparkConf, SparkContext}
 
 
 /**
- * rdd练习
+ * rdd练习--转换算子
  * @author mjw
  * 2021-07-08
  */
