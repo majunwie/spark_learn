@@ -21,46 +21,46 @@ object RddTransformations {
     //flatmap:将每行数据按“,”分割，得到一个集合
     val flatmapRdd: RDD[String] = lines.flatMap(_.split(","))
 //    val flatmapRdd2: RDD[String] = lines2.flatMap(_.split(","))
-    //    flatmapRdd.foreach(it=>println(it))
+    //    flatmapRdd.foreach(println)
         //filter:过滤掉没有m的字符
     //    val filterRdd = flatmapRdd.filter(_.contains("m"))
-    //    filterRdd.foreach(it=>println(it))
+    //    filterRdd.foreach(println)
         //map:转为(word,1)
         //与mapPartitions相比，函数是作用在每行数据上
     //    val mapRdd: RDD[(String, Int)] = flatmapRdd.map((_, 1))
     //    val mapRdd2: RDD[(String, Int)] = flatmapRdd2.map((_, 1))
-    //    mapRdd.foreach(it=>println(it))
+    //    mapRdd.foreach(println)
     //    println("--")
-    //    mapRdd2.foreach(it=>println(it))
+    //    mapRdd2.foreach(println)
     //    println("--")
             //mapPartitions
             //与map相比，函数是作用在分区上
         //    val mapPartaRdd: RDD[(String, Int)] = flatmapRdd.mapPartitions(it => {
         //      it.map((_, 1))
         //    })
-            //    mapPartaRdd.foreach(it=>println(it))
+            //    mapPartaRdd.foreach(println)
                 //sample:采样(是否有放回，采样率，种子)
             //    println("--")
             //    val sampleRdd: RDD[String] = flatmapRdd.sample(false, 0.5)
-            //    sampleRdd.foreach(it=>println(it))
+            //    sampleRdd.foreach(println)
                 //union
             //    val value: RDD[String] = flatmapRdd.union(flatmapRdd2)
-            //    value.foreach(it=>println(it))
+            //    value.foreach(println)
                 //intersection
             //    val interactionRdd: RDD[String] = flatmapRdd.intersection(flatmapRdd2)
-            //    interactionRdd.foreach(it=>println(it))
+            //    interactionRdd.foreach(println)
                 //distinct
             //    val distinctRdd: RDD[String] = flatmapRdd.distinct()
-            //    distinctRdd.foreach(it=>println(it))
+            //    distinctRdd.foreach(println)
             //groupByKey
         //    val groupByKeyRdd: RDD[(String, Iterable[Int])] = mapPartaRdd.groupByKey()
-        //    groupByKeyRdd.foreach(it=>println(it))
+        //    groupByKeyRdd.foreach(println)
                 //reduceByKey
         //        val reduceByKeyRdd: RDD[(String, Int)] = mapPartaRdd.reduceByKey(_ + _)
-        //        reduceByKeyRdd.foreach(it=>println(it))
+        //        reduceByKeyRdd.foreach(println)
             //aggregateByKey
         //        val aggregateByKeyRdd: RDD[(String, Int)] = mapPartaRdd.aggregateByKey(10)(_ + _, _ + _)
-        //        aggregateByKeyRdd.foreach(it=>println(it))
+        //        aggregateByKeyRdd.foreach(println)
             //sortByKey
         //    val sortByKeyRdd: RDD[(String, Int)] = mapPartaRdd.sortByKey()
         //    sortByKeyRdd.foreach(it=>print(it))
@@ -81,7 +81,7 @@ object RddTransformations {
     //    groupwithRdd.foreach(it=>print(it))
     //cartesian
 //        val cartesianRdd:RDD[(String, String)] = flatmapRdd.cartesian(flatmapRdd2)
-//        cartesianRdd.foreach(it=>println(it))
+//        cartesianRdd.foreach(println)
 
     //重新设置分区 repartition  coalesce
 //    val repartitionRdd: RDD[String] = lines.repartition(2)
