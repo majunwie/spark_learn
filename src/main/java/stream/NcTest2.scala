@@ -8,6 +8,7 @@ import org.apache.spark.{SparkConf, SparkContext}
 /**
  * 状态管理，可以将不同批次数据进行累加
  * updateStateByKey
+ * 重新启动就重新计算
  *
  */
 object NcTest2 {
