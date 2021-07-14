@@ -4,6 +4,11 @@ import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 import org.apache.spark.streaming.dstream.{DStream, ReceiverInputDStream}
 
+
+/**
+ * 统计当前批次
+ * reduceByKey
+ */
 object NcTest1 {
 
   def main(args: Array[String]): Unit = {
