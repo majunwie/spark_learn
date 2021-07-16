@@ -10,7 +10,7 @@ import org.apache.spark.{SparkConf, SparkContext}
  * 滑动窗口
  *
  */
-object NcTest4 {
+object NcTest4_window {
 
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("rdd-t").setMaster("local[*]")

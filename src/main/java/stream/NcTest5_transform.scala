@@ -11,7 +11,7 @@ import org.apache.spark.{SparkConf, SparkContext}
  * top5  transform 直接操作rdd
  *
  */
-object NcTest5 {
+object NcTest5_transform {
 
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("rdd-t").setMaster("local[*]")

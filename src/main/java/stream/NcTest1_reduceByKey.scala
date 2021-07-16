@@ -9,7 +9,7 @@ import org.apache.spark.streaming.dstream.{DStream, ReceiverInputDStream}
  * 统计当前批次
  * reduceByKey
  */
-object NcTest1 {
+object NcTest1_reduceByKey {
 
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("rdd-t").setMaster("local[*]")

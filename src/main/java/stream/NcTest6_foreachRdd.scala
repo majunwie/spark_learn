@@ -11,7 +11,7 @@ import org.apache.spark.{SparkConf, SparkContext}
  * foreachRDD 直接操作rdd 无返回值 自定义输出
  *
  */
-object NcTest6 {
+object NcTest6_foreachRdd {
 
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("rdd-t").setMaster("local[*]")
