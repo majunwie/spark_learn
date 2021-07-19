@@ -2,6 +2,10 @@ package sql
 
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
+
+/**
+ * 由文件数据创建df
+ */
 object SqlTest1 {
   def main(args: Array[String]): Unit = {
     val spark: SparkSession = SparkSession.builder().master("local[*]").appName("sql-test").getOrCreate()
