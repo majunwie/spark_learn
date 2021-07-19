@@ -2,7 +2,8 @@ package sql
 
 import org.apache.spark.SparkContext
 import org.apache.spark.rdd.RDD
-import org.apache.spark.sql.{DataFrame, Dataset, SparkSession}
+import org.apache.spark.sql.types.{StringType, StructField, StructType}
+import org.apache.spark.sql.{DataFrame, Dataset, Row, SparkSession}
 
 /**
  * rdd创建df、ds
@@ -13,28 +14,40 @@ object SqlTest2 {
     val spark: SparkSession = SparkSession.builder().master("local[*]").appName("sql-test").getOrCreate()
     val sc: SparkContext = spark.sparkContext
     sc.setLogLevel("WARN")
-    //rdd
-    val rdd: RDD[String] = sc.textFile("data.csv")
-    val personRdd: RDD[Person] = rdd.map(it => {
-      val arr: Array[String] = it.split(",")
-      Person(arr(0), Integer.valueOf(arr(1)))
-    })
+//    println("++++++RDD转为DataFrame方法1++++++")
+//    //rdd
+//    val rdd: RDD[String] = sc.textFile("data.csv")
+//    val personRdd: RDD[Person] = rdd.map(it => {
+//      val arr: Array[String] = it.split(",")
+//      Person(arr(0), Integer.valueOf(arr(1)))
+//    })
+//    import spark.implicits._
+//    val df: DataFrame = personRdd.toDF()
+//    df.show()
+//    df.select("name").show()
+//    println("++++++RDD转为DataSets++++++")
+//    val ds: Dataset[Person] = personRdd.toDS()
+//    ds.show()
+//    ds.select("num").show()
+//    println("++++++DataFrame转为DataSets++++++")
+//    val df2ds: Dataset[Person] = df.as[Person]
+//    df2ds.show()
+//    println("++++++DataFrame转为DataSets++++++")
+//    val ds2df: DataFrame = ds.toDF()
+//    ds2df.show()
+    println("++++++RDD转为DataFrame方法2++++++")
     import spark.implicits._
-    println("++++++RDD转为DataFrame++++++")
-    val df: DataFrame = personRdd.toDF()
-    df.show()
-    df.select("name").show()
-    println("++++++RDD转为DataSets++++++")
-    val ds: Dataset[Person] = personRdd.toDS()
-    ds.show()
-    ds.select("num").show()
-    println("++++++DataFrame转为DataSets++++++")
-    val df2ds: Dataset[Person] = df.as[Person]
-    df2ds.show()
-    println("++++++DataFrame转为DataSets++++++")
-    val ds2df: DataFrame = ds.toDF()
-    ds2df.show()
-    //关闭资源
+    val rdd2:RDD[String] = sc.textFile("data.csv")
+    val schemaStr: String = "name age"
+    val fields: Array[StructField] = schemaStr.split(" ").map(it => StructField(it, StringType, nullable = true))
+    val structType: StructType = StructType(fields)
+    val rowRdd: RDD[Row] = rdd2.map(_.split(",")).map(it => Row(it(0), it(1).trim))
+    val df2: DataFrame = spark.createDataFrame(rowRdd, structType)
+    df2.show()
+    println("++++++seq  to  ds++++++")
+    val seq2ds: Dataset[Person] = Seq(Person("lll", 10)).toDS()
+    seq2ds.show()
+      //关闭资源
     spark.stop()
   }
 
