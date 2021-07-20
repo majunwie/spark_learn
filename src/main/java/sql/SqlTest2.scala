@@ -36,17 +36,25 @@ object SqlTest2 {
 //    val ds2df: DataFrame = ds.toDF()
 //    ds2df.show()
     println("++++++RDD转为DataFrame方法2++++++")
-    import spark.implicits._
     val rdd2:RDD[String] = sc.textFile("data.csv")
-    val schemaStr: String = "name age"
-    val fields: Array[StructField] = schemaStr.split(" ").map(it => StructField(it, StringType, nullable = true))
-    val structType: StructType = StructType(fields)
-    val rowRdd: RDD[Row] = rdd2.map(_.split(",")).map(it => Row(it(0), it(1).trim))
-    val df2: DataFrame = spark.createDataFrame(rowRdd, structType)
-    df2.show()
-    println("++++++seq  to  ds++++++")
-    val seq2ds: Dataset[Person] = Seq(Person("lll", 10)).toDS()
-    seq2ds.show()
+    val rowRdd2: RDD[(String, Int)] = rdd2.map(it => {
+      val arr: Array[String] = it.split(",")
+      (arr(0), arr(1).trim.toInt)
+    })
+    import spark.implicits._
+    rowRdd2.toDF("name","age").show()
+//    println("++++++RDD转为DataFrame方法3++++++")
+//    import spark.implicits._
+//    val rdd3:RDD[String] = sc.textFile("data.csv")
+//    val schemaStr: String = "name age"
+//    val fields: Array[StructField] = schemaStr.split(" ").map(it => StructField(it, StringType, nullable = true))
+//    val structType: StructType = StructType(fields)
+//    val rowRdd: RDD[Row] = rdd3.map(_.split(",")).map(it => Row(it(0), it(1).trim))
+//    val df2: DataFrame = spark.createDataFrame(rowRdd, structType)
+//    df2.show()
+//    println("++++++seq  to  ds++++++")
+//    val seq2ds: Dataset[Person] = Seq(Person("lll", 10)).toDS()
+//    seq2ds.show()
       //关闭资源
     spark.stop()
   }
