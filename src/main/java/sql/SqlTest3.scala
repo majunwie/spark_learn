@@ -31,8 +31,8 @@ object SqlTest3 {
 
     //全局view
     df.createGlobalTempView("person2")
-    spark.newSession().sql("select * from person2").show()
-    spark.newSession().sql("select * from person").show()
+    spark.newSession().sql("select * from global_temp.person2").show()
+    spark.sql("select * from person").show()
     spark.stop()
 
   }
