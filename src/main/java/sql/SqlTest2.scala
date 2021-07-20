@@ -55,6 +55,8 @@ object SqlTest2 {
 //    println("++++++seq  to  ds++++++")
 //    val seq2ds: Dataset[Person] = Seq(Person("lll", 10)).toDS()
 //    seq2ds.show()
+
+    //df和ds转为rdd：df.rdd    ds.rdd
       //关闭资源
     spark.stop()
   }
