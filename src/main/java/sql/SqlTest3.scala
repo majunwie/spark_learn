@@ -25,16 +25,22 @@ object SqlTest3 {
 //    df.groupBy("name").sum().show()
 //    df.select($"name",$"num"+1).show
     //查询num大于30的分组结果
-    df.filter($"num" > 20).groupBy("name").avg().show()
-    df.where($"num" >20).groupBy("name").avg().show()
-    df.groupBy("name").pivot("num").count().show()
+//    df.filter($"num" > 20).groupBy("name").avg().show()
+//    df.where($"num" >20).groupBy("name").avg().show()
+//    df.groupBy("name").pivot("num").count().show()
     //sql查询
-//    df.createTempView("person")
+    df.createTempView("person")
 //    spark.sql("select name,sum(num) from person group by name").show()
 //    //全局view
 //    df.createGlobalTempView("person2")
 //    spark.newSession().sql("select * from global_temp.person2").show()
 //    spark.newSession().sql("select * from person").show()
+
+
+    //udf
+    spark.udf.register("myf",(num:Int)=>num*1000)
+    spark.sql("select myf(num) from person").show()
+
     spark.stop()
 
   }
