@@ -1,4 +1,4 @@
-package stream
+package streaming
 
 import org.apache.spark.streaming.dstream.{DStream, ReceiverInputDStream}
 import org.apache.spark.streaming.{Duration, Minutes, Seconds, StreamingContext}

@@ -1,4 +1,4 @@
-package stream
+package streaming
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.streaming.dstream.{DStream, ReceiverInputDStream}
@@ -8,10 +8,10 @@ import org.apache.spark.{SparkConf, SparkContext}
 
 /**
  *
- * foreachRDD 直接操作rdd 无返回值 自定义输出
+ * top5  transform 直接操作rdd
  *
  */
-object NcTest6_foreachRdd {
+object NcTest5_transform {
 
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("rdd-t").setMaster("local[*]")
@@ -28,13 +28,7 @@ object NcTest6_foreachRdd {
       top5.foreach(println)
       sortedRdd
     })
-
-    //自定义输出
-    resultDs.foreachRDD((rdd,time)=>{
-      println(time.milliseconds)
-      rdd.foreach(println)
-      //可以往任何可以输出的地方输出
-    })
+    resultDs.print()
     ssc.start()
     ssc.awaitTermination()
     ssc.stop(true,true)
