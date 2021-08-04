@@ -4,7 +4,7 @@ import org.apache.spark.SparkContext
 import org.apache.spark.sql.{DataFrame, Dataset, SparkSession}
 
 /**
- * join 操作
+ * stream  join  static
  */
 object SsTest8_join1 {
 

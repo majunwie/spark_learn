@@ -3,7 +3,7 @@ package structedStreaming
 import org.apache.spark.SparkContext
 import org.apache.spark.sql.{DataFrame, Dataset, Row, SparkSession}
 
-object SsTest2_Rate {
+object SsTest2_socket {
 
   def main(args: Array[String]): Unit = {
     val spark: SparkSession = SparkSession.builder().master("local[*]").appName("structed-streaming").getOrCreate()

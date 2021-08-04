@@ -7,7 +7,7 @@ import org.apache.spark.sql.{DataFrame, Dataset, Row, SparkSession}
  * rate 测试时使用
  * 随机生成数据
  */
-object SsTest1_socket {
+object SsTest1_rate {
 
   def main(args: Array[String]): Unit = {
     val spark: SparkSession = SparkSession.builder().master("local[*]").appName("structed-streaming").getOrCreate()
