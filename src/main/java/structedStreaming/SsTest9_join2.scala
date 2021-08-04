@@ -31,11 +31,6 @@ object SsTest9_join2 {
         Person1(arr(0), Timestamp.valueOf(arr(1)))
       })
       .withWatermark("time1", "10 seconds")
-//      .groupBy(
-//        window($"time1", "10 seconds") as "window1",
-//        $"name1"
-//      )
-//      .count()
     //stream2
     val ds2: Dataset[Person2] = spark.readStream
       .format("socket")
@@ -48,11 +43,6 @@ object SsTest9_join2 {
         Person2(arr(0), Timestamp.valueOf(arr(1)))
       })
       .withWatermark("time2", "10 seconds")
-//      .groupBy(
-//        window($"time2", "10 seconds") as "window2",
-//        $"name2"
-//      )
-//      .count()
     //join
     val result: DataFrame = ds1.join(
       ds2,
