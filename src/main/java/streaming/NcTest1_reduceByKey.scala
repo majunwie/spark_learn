@@ -22,7 +22,7 @@ object NcTest1_reduceByKey {
     result.print()
 
     ssc.start()
-    ssc.awaitTermination()
+    ssc.awaitTerminationOrTimeout(100000)
 
     ssc.stop(true,true)
   }

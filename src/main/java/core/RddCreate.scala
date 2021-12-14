@@ -25,7 +25,7 @@ object RddCreate {
     val lines2 = spark.textFile("data2.txt",1)
     lines.map(it => {
       val arr = it.split(",")
-      (arr(0), Integer.valueOf(arr(1)))
+      (arr(0), 1)
     }).reduceByKey(_ + _).foreach(it=>print(it))
     lines.flatMap(_.split(",")).mapPartitions(it=>{
       it.map((_,1))
