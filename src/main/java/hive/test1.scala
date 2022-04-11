@@ -12,7 +12,8 @@ object test1 {
       .enableHiveSupport()
       .getOrCreate()
     spark.sql("use test")
-    spark.sql("select * from test").show()
+    println("1")
+    spark.sql("select * from hive_d").show()
     spark.stop()
   }
 }

@@ -12,7 +12,7 @@ import org.apache.spark.{SparkConf, SparkContext}
 object RddTransformations {
   def main(args: Array[String]): Unit = {
     //环境
-    val conf = new SparkConf().setAppName("rdd-t").setMaster("local[2]")
+    val conf = new SparkConf().setAppName("rdd-t").setMaster("local[*]")
     val spark = new SparkContext(conf)
     spark.setLogLevel("WARN")
     //从文件中创建
@@ -44,8 +44,8 @@ object RddTransformations {
             //    val sampleRdd: RDD[String] = flatmapRdd.sample(false, 0.5)
             //    sampleRdd.foreach(println)
                 //union
-//                val value: RDD[String] = flatmapRdd.union(flatmapRdd2)
-//                value.foreach(println)
+                val value: RDD[String] = flatmapRdd.union(flatmapRdd2)
+                value.foreach(println)
                 //intersection
 //                val interactionRdd: RDD[String] = flatmapRdd.intersection(flatmapRdd2)
 //                interactionRdd.foreach(println)
@@ -80,8 +80,8 @@ object RddTransformations {
 //        println("--")
 //        groupwithRdd.foreach(it=>print(it))
     //cartesian
-        val cartesianRdd:RDD[(String, String)] = flatmapRdd.cartesian(flatmapRdd2)
-        cartesianRdd.foreach(println)
+//        val cartesianRdd:RDD[(String, String)] = flatmapRdd.cartesian(flatmapRdd2)
+//        cartesianRdd.foreach(println)
 
     //重新设置分区 repartition  coalesce
 //    val repartitionRdd: RDD[String] = lines.repartition(2)
